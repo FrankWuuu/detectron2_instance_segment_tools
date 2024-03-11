@@ -81,7 +81,8 @@ INPUT:
   MIN_SCALE: 0.1
   MAX_SCALE: 2.0
   FORMAT: "RGB"
-  DATASET_MAPPER_NAME: "coco_instance_lsj"
+  # DATASET_MAPPER_NAME: "coco_instance_lsj"
+  DATASET_MAPPER_NAME: "mask_former_instance"
 TEST:
   EVAL_PERIOD: 5000
 DATALOADER:
@@ -89,4 +90,5 @@ DATALOADER:
   NUM_WORKERS: 4
 VERSION: 2
 
-OUTPUT_DIR: "../tooth_ins_out/mask2former/tooth_1"
+# OUTPUT_DIR: "../tooth_ins_out/mask2former/tooth_1"
+OUTPUT_DIR: "../tooth_ins_out/mask2former/tooth_2"
