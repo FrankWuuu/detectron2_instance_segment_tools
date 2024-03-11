@@ -317,19 +317,35 @@ def main(args):
 
 # if your dataset is in COCO format, this cell can be replaced by the following three lines:
 from detectron2.data.datasets import register_coco_instances
-register_coco_instances("UESB_t_train", {}, "tooth_ins/UESB_t/annotations/train.json", "tooth_ins/UESB_t/train")
-register_coco_instances("UESB_t_test", {}, "tooth_ins/UESB_t/annotations/test.json", "tooth_ins/UESB_t/test")
+register_coco_instances("UESB_t_train", {}, "../tooth_ins/UESB_t/annotations/train.json", "../tooth_ins/UESB_t/train")
+register_coco_instances("UESB_t_test", {}, "../tooth_ins/UESB_t/annotations/test.json", "../tooth_ins/UESB_t/test")
 
 
+if __name__ == "__main__":
+    args = default_argument_parser().parse_args()
+    print("Command Line Args:", args)
+    launch(
+        main,
+        args.num_gpus,
+        num_machines=args.num_machines,
+        machine_rank=args.machine_rank,
+        dist_url=args.dist_url,
+        args=(args,),
+    )
 
-# if __name__ == "__main__":
-#     args = default_argument_parser().parse_args()
-#     print("Command Line Args:", args)
-#     launch(
-#         main,
-#         args.num_gpus,
-#         num_machines=args.num_machines,
-#         machine_rank=args.machine_rank,
-#         dist_url=args.dist_url,
-#         args=(args,),
-#     )
+'''
+# To train a model with "train_net.py", 
+# first setup the corresponding datasets following datasets/README.md, 
+# then run:
+
+cd Mask2Former
+python train_net_tooth_ins.py \
+  --config-file ../configs/maskformer2_R50_bs16_50ep_tooth_ins.yaml \
+  --num-gpus 1 SOLVER.IMS_PER_BATCH 2 SOLVER.BASE_LR 0.0025
+
+# To evaluate a model's performance, use
+
+./plain_train_net.py \
+  --config-file ../configs/maskformer2_R50_bs16_50ep_tooth_ins.yaml \
+  --eval-only MODEL.WEIGHTS /model_0004999.pth
+'''
