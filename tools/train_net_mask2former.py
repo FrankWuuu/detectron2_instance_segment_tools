@@ -287,7 +287,7 @@ def setup(args):
     add_deeplab_config(cfg)
     add_maskformer2_config(cfg)
     cfg.merge_from_file(args.config_file)
-    cfg.OUTPUT_DIR = "../tooth_ins_out/mask2former/tooth_3/"
+    # cfg.OUTPUT = ""
     cfg.merge_from_list(args.opts)
     cfg.freeze()
     default_setup(cfg, args)
@@ -334,13 +334,15 @@ if __name__ == "__main__":
         args=(args,),
     )
 
+
+
 '''
 # To train a model with "train_net.py", 
 # first setup the corresponding datasets following datasets/README.md, 
 # then run:
 
 # --resume for continue training
-python train_net_tooth_ins.py \
+python train_net_tooth.py \
   --config-file ../configs/maskformer2_R50_bs16_50ep_tooth_ins.yaml \
   --resume \
   --num-gpus 1 SOLVER.IMS_PER_BATCH 2 SOLVER.BASE_LR 0.0025
@@ -348,7 +350,7 @@ python train_net_tooth_ins.py \
 
 # To evaluate a model's performance, use
 
-python train_net_tooth_ins.py \
+python train_net_tooth.py \
   --config-file ../configs/maskformer2_R50_bs16_50ep_tooth_ins.yaml \
   --eval-only MODEL.WEIGHTS ../tooth_ins_out/mask2former/tooth_3/model_0004999.pth
 '''

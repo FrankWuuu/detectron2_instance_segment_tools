@@ -72,7 +72,9 @@ def main() -> None:
 
     pred_by_image = defaultdict(list)
     for p in predictions:
-        pred_by_image[p["image_id"]].append(p)
+        threshold_mine = 0.75
+        if p["score"] > threshold_mine:
+            pred_by_image[p["image_id"]].append(p)
 
     dicts = list(DatasetCatalog.get(args.dataset))
     metadata = MetadataCatalog.get(args.dataset)
