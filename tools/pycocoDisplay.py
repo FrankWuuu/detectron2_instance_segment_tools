@@ -1,8 +1,6 @@
 from pycocotools.coco import COCO
 import numpy as np
-import skimage.io as io
 import matplotlib.pyplot as plt
-import pylab
 import os
 from PIL import Image
 import cv2
@@ -37,11 +35,10 @@ for i in range(len(anns)):
 # new_a = mask/2*255
 new_a=np.where(mask==0,0,1)*255
 
-
 plt.imshow(mask)
-cv2.imwrite("mask.jpg",new_a)
+cv2.imwrite(file_name+"mask.jpg",new_a)
+# plt.savefig(file_name+'_mask.jpg')
 
-plt.savefig(file_name+'_mask.jpg')
 # plt.axes("off")
 plt.axis('off')
 plt.savefig("demo1.jpg", bbox_inches="tight")
