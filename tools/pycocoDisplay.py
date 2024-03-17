@@ -37,10 +37,7 @@ new_a=np.where(mask==0,0,1)*255
 
 plt.imshow(mask)
 cv2.imwrite(file_name+"mask.jpg",new_a)
+
 # plt.savefig(file_name+'_mask.jpg')
-
-# plt.axes("off")
-plt.axis('off')
-plt.savefig("demo1.jpg", bbox_inches="tight")
+# plt.axis('off')
 # plt.show()
-
