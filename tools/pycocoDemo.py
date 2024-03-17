@@ -7,15 +7,16 @@ pylab.rcParams['figure.figsize'] = (8.0, 10.0)
 
 
 # dataDir="tooth_ins/children/train/images"
-dataDir="tooth_ins/UESB_t/test"
+# dataDir="tooth_ins/UESB_t/test"
+dataDir="tufts/coco/all_img"
 # dataType='val2017'
 # annFile='{}/annotations/instances_{}.json'.format(dataDir,dataType)
 # annFile=dataDir +'/annotations/train.json'
 # annFile=dataDir +'/annotations/train.json'
 
 # annFile="train_rle.json"
-annFile="tooth_ins_out/inference/UESB_t_test/coco_instances_results.json"
-annFile="tooth_ins_out/inference/UESB_t_test/output_demo.json"
+# annFile="tooth_ins_out/inference/UESB_t_test/coco_instances_results.json"
+annFile="tufts_code/tufts_polygon_2_coco.json"
 # annFile="O2PR/test/annotations/test.json"
 # annFile="DEMO_OUTPUT/inference/my_dataset_val/output_demo.json"
 

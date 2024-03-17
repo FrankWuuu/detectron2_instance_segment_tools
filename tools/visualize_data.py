@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # Copyright (c) Facebook, Inc. and its affiliates.
+# copy from detectron2/tools/visualize_data.py
+# visualize the annotation json to images
 import argparse
 import os
 from itertools import chain
@@ -31,14 +33,15 @@ def setup(args):
 
 def parse_args(in_args=None):
     parser = argparse.ArgumentParser(description="Visualize ground-truth data")
-    parser.add_argument(
-        "--source",
-        choices=["annotation", "dataloader"],
-        required=True,
-        help="visualize the annotations or the data loader (with pre-processing)",
-    )
-    parser.add_argument("--config-file", metavar="FILE", help="path to config file")
-    parser.add_argument("--output-dir", default="./", help="path to output directory")
+    # parser.add_argument(
+    #     "--source",
+    #     choices=["annotation", "dataloader"],
+    #     required=True,
+    #     help="visualize the annotations or the data loader (with pre-processing)",
+    # )
+    # parser.add_argument("--config-file", metavar="FILE", help="path to config file")
+    parser.add_argument("--output-dir", default="tooth_ins_out/test_bi", help="path to output directory")
+    parser.add_argument("--KEYPOINT_ON", default=False, help="KEYPOINT on or not")
     parser.add_argument("--show", action="store_true", help="show output in a window")
     parser.add_argument(
         "opts",
@@ -54,12 +57,15 @@ def main() -> None:
     args = parse_args()
     logger = setup_logger()
     logger.info("Arguments: " + str(args))
-    cfg = setup(args)
+    # cfg = setup(args)
 
     dirname = args.output_dir
+    # dirname = cfg.OUTPUT_DIR
+
     os.makedirs(dirname, exist_ok=True)
     # metadata = MetadataCatalog.get(cfg.DATASETS.TRAIN[0])
-    metadata = MetadataCatalog.get(cfg.DATASETS.TEST[0])
+    # metadata = MetadataCatalog.get(cfg.DATASETS.TEST[0])
+    metadata = MetadataCatalog.get("UESB_t_test")
 
     def output(vis, fname):
         if args.show:
@@ -72,37 +78,19 @@ def main() -> None:
             vis.save(filepath)
 
     scale = 1.0
-    if args.source == "dataloader":
-        train_data_loader = build_detection_train_loader(cfg)
-        for batch in train_data_loader:
-            for per_image in batch:
-                # Pytorch tensor is in (C, H, W) format
-                img = per_image["image"].permute(1, 2, 0).cpu().detach().numpy()
-                img = utils.convert_image_to_rgb(img, cfg.INPUT.FORMAT)
 
-                visualizer = Visualizer(img, metadata=metadata, scale=scale)
-                target_fields = per_image["instances"].get_fields()
-                labels = [
-                    metadata.thing_classes[i] for i in target_fields["gt_classes"]
-                ]
-                vis = visualizer.overlay_instances(
-                    labels=labels,
-                    boxes=target_fields.get("gt_boxes", None),
-                    masks=target_fields.get("gt_masks", None),
-                    keypoints=target_fields.get("gt_keypoints", None),
-                )
-                output(vis, str(per_image["image_id"]) + ".jpg")
-    else:
-        dicts = list(
-            chain.from_iterable([DatasetCatalog.get(k) for k in cfg.DATASETS.TEST])
-        )
-        if cfg.MODEL.KEYPOINT_ON:
-            dicts = filter_images_with_few_keypoints(dicts, 1)
-        for dic in tqdm.tqdm(dicts):
-            img = utils.read_image(dic["file_name"], "RGB")
-            visualizer = Visualizer(img, metadata=metadata, scale=scale)
-            vis = visualizer.draw_dataset_dict(dic)
-            output(vis, os.path.basename(dic["file_name"]))
+    dicts = list(
+        # chain.from_iterable([DatasetCatalog.get(k) for k in cfg.DATASETS.train])
+        chain.from_iterable([DatasetCatalog.get(k) for k in ("UESB_t_test",)])
+    )
+    # if cfg.MODEL.KEYPOINT_ON:
+    if args.KEYPOINT_ON:
+        dicts = filter_images_with_few_keypoints(dicts, 1)
+    for dic in tqdm.tqdm(dicts):
+        img = utils.read_image(dic["file_name"], "RGB")
+        visualizer = Visualizer(img, metadata=metadata, scale=scale)
+        vis = visualizer.draw_dataset_dict(dic)
+        output(vis, os.path.basename(dic["file_name"]))
 
 
 # if your dataset is in COCO format, this cell can be replaced by the following three lines:
