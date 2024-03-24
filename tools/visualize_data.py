@@ -40,7 +40,7 @@ def parse_args(in_args=None):
     #     help="visualize the annotations or the data loader (with pre-processing)",
     # )
     # parser.add_argument("--config-file", metavar="FILE", help="path to config file")
-    parser.add_argument("--output-dir", default="tooth_ins_out/test_bi", help="path to output directory")
+    parser.add_argument("--output-dir", default="tooth_ins_out/test_gt_bb", help="path to output directory")
     parser.add_argument("--KEYPOINT_ON", default=False, help="KEYPOINT on or not")
     parser.add_argument("--show", action="store_true", help="show output in a window")
     parser.add_argument(

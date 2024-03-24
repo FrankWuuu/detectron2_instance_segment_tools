@@ -36,7 +36,8 @@ for i in range(len(anns)):
 new_a=np.where(mask==0,0,1)*255
 
 plt.imshow(mask)
-cv2.imwrite(file_name+"mask.jpg",new_a)
+file_name = file_name.split('.')[0]
+cv2.imwrite(file_name+"_mask.jpg",new_a)
 
 # plt.savefig(file_name+'_mask.jpg')
 # plt.axis('off')

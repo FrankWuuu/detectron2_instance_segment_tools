@@ -107,7 +107,8 @@ def main() -> None:
         concat = np.concatenate((vis_pred, vis_gt), axis=1)
         # no concat here!
         # cv2.imwrite(os.path.join(args.output, basename), concat[:, :, ::-1])
-        cv2.imwrite(os.path.join(args.output,"no_bb_"+basename), vis_pred)
+        # cv2.imwrite(os.path.join(args.output,"no_bb_"+basename), vis_pred)
+        cv2.imwrite(os.path.join(args.output,"bb_"+basename), vis_pred)
 
 if __name__ == "__main__":
     main()  # pragma: no cover
