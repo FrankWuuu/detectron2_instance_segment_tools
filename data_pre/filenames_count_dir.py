@@ -27,26 +27,26 @@ names_not_use = list(set(names_in_dir)-set(names_in_UESB_t_train)\
 print(len(names_not_use))
 
 ######## to save the not_use img names to csv #########
-import csv
-path_csv_not_use = "data_pre/not_use.csv"
-with open(path_csv_not_use, "w+") as csvFile:
-    writer = csv.writer(csvFile)
-    for i in range(len(names_not_use)):
-        writer.writerow([names_not_use[i]])
+# import csv
+# path_csv_not_use = "data_pre/not_use_01.csv"
+# with open(path_csv_not_use, "w+") as csvFile:
+#     writer = csv.writer(csvFile)
+#     for i in range(len(names_not_use)):
+#         writer.writerow([names_not_use[i]])
 
 
 ############# to save imgs to different dirs ############
 '''
 names_in_dir #total 478
-names_in_UESB_t_test # 20
-names_in_UESB_t_train # 173
+names_in_UESB_t_test # 93
+names_in_UESB_t_train # 100
 names_not_use # 285
 '''
 import  shutil
 
 path_UESB_t_train = "tooth_ins/UESB_t/train"
 path_UESB_t_test = "tooth_ins/UESB_t/test"
-path_not_use = "data_pre/not_use"
+path_not_use = "tooth_ins/UESB_t/not_use"
 
 os.makedirs(path_UESB_t_train,exist_ok=True)
 os.makedirs(path_UESB_t_test,exist_ok=True)

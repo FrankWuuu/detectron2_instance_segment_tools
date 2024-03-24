@@ -3,8 +3,8 @@ import argparse
 import csv
 
 parser = argparse.ArgumentParser(description='count COCO annotations images file_names into CSV.')
-parser.add_argument('-json', default="data_pre/test.json", help="annotation json file path")
-parser.add_argument('-csv', default="data_pre/test.csv", help="the file_name list csv file path")
+parser.add_argument('-json', default="data_pre/train.json", help="annotation json file path")
+parser.add_argument('-csv', default="data_pre/train.csv", help="the file_name list csv file path")
 args = parser.parse_args()
 
 def main(args):

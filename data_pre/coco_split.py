@@ -19,7 +19,8 @@ parser = argparse.ArgumentParser(description='Splits COCO annotations file into 
 parser.add_argument('-annotations', default='UESB/test/annotations/test.json', type=str, help='Path to COCO annotations file.')
 parser.add_argument('-train_path', default='data_pre/train.json', type=str, help='Where to store COCO training annotations')
 parser.add_argument('-test_path', default='data_pre/test.json', type=str, help='Where to store COCO test annotations')
-parser.add_argument('-s', dest='split', type=float, default=0.9, help="A percentage of a split; a number in (0, 1)")
+# parser.add_argument('-s', dest='split', type=float, default=0.9, help="A percentage of a split; a number in (0, 1)")
+parser.add_argument('-s', dest='split', type=float, default=100, help="A percentage of a split; a number in (0, 1)")
 args = parser.parse_args()
 
 def main(args):
