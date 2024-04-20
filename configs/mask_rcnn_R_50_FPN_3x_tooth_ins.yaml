@@ -10,8 +10,8 @@ MODEL:
   ROI_HEADS:
     NAME: "Res5ROIHeads"
 DATASETS:
-  TRAIN: ("UESB_t_train",)
-  TEST: ("UESB_t_test",)
+  TRAIN: ("UESB_T_train",)
+  TEST: ("UESB_T_test",)
 SOLVER:
   IMS_PER_BATCH: 16
   BASE_LR: 0.02
@@ -20,4 +20,4 @@ SOLVER:
 INPUT:
   MIN_SIZE_TRAIN: (640, 672, 704, 736, 768, 800)
 VERSION: 2
-OUTPUT_DIR: "tooth_ins_out"
+OUTPUT_DIR: "tooth_ins_out/UEST_T/MRCNN/"
