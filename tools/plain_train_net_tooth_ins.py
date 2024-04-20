@@ -246,8 +246,13 @@ from detectron2.data.datasets import register_coco_instances
 # register_coco_instances("children_train_supp", {}, "tooth_ins/children/train_supp/annotations.json", "tooth_ins/children/train_supp/images")
 # register_coco_instances("children_test", {}, "tooth_ins/children/test/annotations.json", "tooth_ins/children/test/images")
 
-register_coco_instances("UESB_t_train", {}, "tooth_ins/UESB_t/annotations/train.json", "tooth_ins/UESB_t/train")
-register_coco_instances("UESB_t_test", {}, "tooth_ins/UESB_t/annotations/test.json", "tooth_ins/UESB_t/test")
+path_json_train = "/autodl-fs/data/UEST_T/annotations/train.json"
+path_json_test = "/autodl-fs/data/UEST_T/annotations/test.json"
+path_img_train = "/autodl-fs/data/UEST_T/train/"
+path_img_test = "/autodl-fs/data/UEST_T/test/"
+
+register_coco_instances("UESB_T_train", {}, path_json_train, path_img_train)
+register_coco_instances("UESB_T_test", {}, path_json_test, path_img_test)
 
 
 if __name__ == "__main__":
@@ -265,9 +270,9 @@ cd tools/
 #The configs are made for 8-GPU training. To train on 1 GPU, 
 #you may need to change some parameters, e.g.:
 
-tools/plain_train_net_tooth_ins.py \
-  --config-file configs/mask_rcnn_R_50_FPN_3x_tooth_ins.yaml \
-  --num-gpus 1 SOLVER.IMS_PER_BATCH 2 SOLVER.BASE_LR 0.0025
+detectron2_instance_segment_tools/tools/plain_train_net_tooth_ins.py \
+  --config-file detectron2_instance_segment_tools/configs/mask_rcnn_R_50_FPN_3x_tooth_ins.yaml \
+  --num-gpus 1 SOLVER.IMS_PER_BATCH 8 SOLVER.BASE_LR 0.0025
 
 ./plain_train_net.py \
   --config-file mask_rcnn_R_50_FPN_3x_f.yaml \
