@@ -1,7 +1,7 @@
 import os
 
-path_csv_train = "data_pre/train.csv"
-path_csv_test = "data_pre/test.csv"
+path_csv_train = "data_pre/tooth_T/train.csv"
+path_csv_test = "data_pre/tooth_T/test.csv"
 
 names_in_UESB_t_train = []
 names_in_UESB_t_test = []
